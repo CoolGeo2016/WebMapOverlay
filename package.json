@@ -1,0 +1,28 @@
+{
+  "name": "315",
+  "version": "1.0.0",
+  "description": "WebMapOverlay",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CoolGeo2016/WebMapOverlay.git"
+  },
+  "keywords": [
+    "webgis"
+  ],
+  "author": "lir",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CoolGeo2016/WebMapOverlay/issues"
+  },
+  "homepage": "https://github.com/CoolGeo2016/WebMapOverlay#readme",
+  "dependencies": {
+    "esri-leaflet": "^2.0.7",
+    "framework7": "^1.5.4",
+    "leaflet": "^1.0.3",
+    "vue": "^2.2.4"
+  }
+}
