@@ -1607,6 +1607,89 @@
 	var BasemapLayer = L.TileLayer.extend({
 	  statics: {
 	    TILES: {
+					// cnmaps
+		 			//自定义中国灰色地图（ArcGIS Server切片服务，来自arcgisonline.cn）
+          chinagray: {
+            urlTemplate: "http://cache1.arcgisonline.cn/ArcGIS/rest/services/ChinaOnlineStreetGray/MapServer/tile/{z}/{y}/{x}",
+            options: {
+              minZoom: 1,
+              maxZoom: 19,
+            }
+          },
+          //自定义中国彩色地图（ArcGIS Server切片服务，来自arcgisonline.cn）
+          chinacolor: {
+            urlTemplate: "http://cache1.arcgisonline.cn/ArcGIS/rest/services/ChinaOnlineStreetColor/MapServer/tile/{z}/{y}/{x}",
+            options: {
+              minZoom: 1,
+              maxZoom: 19
+            }
+          },
+          //天地图矢量地图服务
+          TianDiTuVec: {
+            urlTemplate: "http://t{s}.tianditu.cn/DataServer?T=vec_w&X={x}&Y={y}&L={z}",                          
+            options: {
+              minZoom: 1,
+              maxZoom: 19,
+              subdomains: ['0', '1', '2', '3', '4', '5', '6', '7']
+            }
+          },
+          //天地图矢量标注服务
+          TianDiTuVec_A: {
+            urlTemplate: "http://t{s}.tianditu.cn/DataServer?T=cva_w&X={x}&Y={y}&L={z}",                          
+            options: {
+              minZoom: 1,
+              maxZoom: 19,
+              subdomains: ['0', '1', '2', '3', '4', '5', '6', '7']
+            }
+          },
+          //天地图卫星底图服务
+          TianDiTuSat: {
+            urlTemplate: "http://t{s}.tianditu.cn/DataServer?T=img_w&X={x}&Y={y}&L={z}",                          
+            options: {
+              minZoom: 1,
+              maxZoom: 19,
+              subdomains: ['0', '1', '2', '3', '4', '5', '6', '7']
+            }
+          },
+          //天地图卫星影像标注
+          TianDiTuSat_A: {
+            urlTemplate: "http://t{s}.tianditu.cn/DataServer?T=cia_w&X={x}&Y={y}&L={z}",                          
+            options: {
+              minZoom: 1,
+              maxZoom: 19,
+              subdomains: ['0', '1', '2', '3', '4', '5', '6', '7']
+            }
+          },
+          
+          //高德矢量地图服务
+          GaodeVec: {
+            urlTemplate: "http://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",                          
+            options: {
+              minZoom: 3,
+              maxZoom: 18,
+              subdomains: [ '1', '2', '3', '4']
+            }
+          },
+          //高德卫星影像服务
+          GaodeSat: {
+            urlTemplate: "http://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",                          
+            options: {
+              minZoom: 3,
+              maxZoom: 18,
+              subdomains: [ '1', '2', '3', '4']
+            }
+          },
+          //高德卫星影像标注
+          GaodeSat_A: {
+            urlTemplate: "http://webst0{s}.is.autonavi.com/appmaptile?style=8&x={x}&y={y}&z={z}",                          
+            options: {
+              minZoom: 3,
+              maxZoom: 18,
+              subdomains: ["1", "2", "3", "4"]
+            }
+          },
+
+				// cnmaps e
 	      Streets: {
 	        urlTemplate: tileProtocol + '//{s}.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
 	        options: {

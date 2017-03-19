@@ -15,6 +15,14 @@ Vue.component('page-dynamic-routing', {
 // Init App
 new Vue({
   el: '#app',
+	data:{ 
+				sl01 : L.esri.dynamicMapLayer({url: 'http://14.23.112.28:81/arcgis/rest/services/SL/TDJZ/MapServer',opacity: 0.7,maptype:'sl01',added:false}),
+				sl02 : L.esri.dynamicMapLayer({url: 'http://14.23.112.28:81/arcgis/rest/services/SL/0805/MapServer',opacity: 0.7,maptype:'sl02',added:false}),
+				sl03 : L.esri.dynamicMapLayer({url: 'http://14.23.112.28:81/arcgis/rest/services/SL/DWHHSJ/MapServer',opacity: 0.7,maptype:'sl03',added:false}),
+				sl04 : L.esri.dynamicMapLayer({url: 'http://14.23.112.28:81/arcgis/rest/services/SL/GDJT/MapServer',opacity: 0.7,maptype:'sl04',added:false}),
+				sl05 : L.esri.dynamicMapLayer({url: 'http://14.23.112.28:81/arcgis/rest/services/SL/LAYD/MapServer',opacity: 0.7,maptype:'sl05',added:false}),
+				sl06 : L.esri.dynamicMapLayer({url: 'http://14.23.112.28:81/arcgis/rest/services/SL/TDJZ/MapServer',opacity: 0.7,maptype:'sl06',added:false})
+			},
   // Init Framework7 by passing parameters here
   framework7: {
     root: '#app',
@@ -34,43 +42,81 @@ new Vue({
         component: 'page-dynamic-routing'
       }
     ],
-  }
+  },
+	methods:{
+		addLayer:function(event){
+			var lname = event.target.attributes.value;
+			if(!this[lname].options.added){
+				this[lname].options.added = true;
+				this[lname].addTo(map);
+			}else{
+				map.eachLayer(function(layer){
+						if(layer.options.maptype == lname){
+								map.removeLayer(layer);
+						}
+				});
+			}
+		}
+	}
 });
 
 
-var mymap = L.map('br-map').setView([51.505, -0.09], 13);
+	var map = L.map("br-map", {
+    // center: [37.71, -99.88],
+    center: [23, 113.25],
+    zoom: 10,
+    zoomControl: false,
+    attributionControl:false
+});
 
-	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-		maxZoom: 18,
-		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-			'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-		id: 'mapbox.streets'
-	}).addTo(mymap);
+customBaselayer= L.esri.basemapLayer("GaodeVec");
+map.addLayer(customBaselayer);  
 
-	L.marker([51.5, -0.09]).addTo(mymap)
-		.bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
+L.control.zoom({
+    zoomInTitle: '放大',
+    zoomOutTitle: '缩小'
+}).addTo(map);
 
-	L.circle([51.508, -0.11], 500, {
-		color: 'red',
-		fillColor: '#f03',
-		fillOpacity: 0.5
-	}).addTo(mymap).bindPopup("I am a circle.");
+var loc = new L.control.loc();
+loc.addTo(map)
 
-	L.polygon([
-		[51.509, -0.08],
-		[51.503, -0.06],
-		[51.51, -0.047]
-	]).addTo(mymap).bindPopup("I am a polygon.");
+var sl01 = L.esri.dynamicMapLayer({
+    url: 'http://14.23.112.28:81/arcgis/rest/services/SL/TDJZ/MapServer',
+    opacity: 0.7,
+		maptype:'sl01',
+  })
 
+var dxtfirst = false;
+var dxtMapon = true;
 
-	var popup = L.popup();
-
-	function onMapClick(e) {
-		popup
-			.setLatLng(e.latlng)
-			.setContent("You clicked the map at " + e.latlng.toString())
-			.openOn(mymap);
-	}
-
-	mymap.on('click', onMapClick);
+$('.list-group-item').on('click',function(e){
+    var className = e.target.className
+    if($(e.target).hasClass('active')){
+        $(e.target).removeClass('active')
+         map.eachLayer(function(layer){
+                    if(layer.options.maptype == 'dxt'){
+                        // layer.setOpacity(0);
+                        map.removeLayer(layer);
+                        dxtMapon = false;
+                    }
+                })
+    }else{
+        $(e.target).addClass('active')
+        $(e.target).siblings().removeClass('active')
+        if(!dxtfirst){
+            dxt.addTo(map);
+            dxtfirst = true;
+        }else{
+            if(!dxtMapon){     
+                map.addLayer(dxt)           
+                // map.eachLayer(function(layer){
+                //     if(layer.options.maptype == 'dxt'){
+                //         // layer.setOpacity(1);
+                //         dxtMapon = true;
+                //     }
+                // })
+                dxtMapon = true;
+            }
+        }
+    }
+})

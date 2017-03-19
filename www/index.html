@@ -16,32 +16,35 @@
     <f7-statusbar></f7-statusbar>
 
     <!-- Left Panel -->
-    <f7-panel left reveal layout="dark">
+    <f7-panel left reveal layout="white">
       <f7-view id="left-panel-view" navbar-through :dynamic-navbar="true">
-        <f7-navbar v-if="$theme.ios" title="Left Panel" sliding></f7-navbar>
+        <f7-navbar v-if="$theme.ios" title="专题图层" sliding></f7-navbar>
         <f7-pages>
           <f7-page>
-            <f7-navbar v-if="$theme.ios" title="Left Panel" sliding></f7-navbar>
-            <f7-block inner>
-              <p>Left panel content goes here</p>
-            </f7-block>
-            <f7-block-title>Load page in panel</f7-block-title>
-            <f7-list>
-              <f7-list-item link="/about/" title="About"></f7-list-item>
-              <f7-list-item link="/form/" title="Form"></f7-list-item>
-            </f7-list>
-            <f7-block-title>Load page in main view</f7-block-title>
-            <f7-list>
-              <f7-list-item link="/about/" title="About" link-view="#main-view" link-close-panel></f7-list-item>
-              <f7-list-item link="/form/" title="Form" link-view="#main-view" link-close-panel></f7-list-item>
-            </f7-list>
+            <f7-block-title>专题图层</f7-block-title>
+          <f7-list accordion>
+            <f7-list-item accordion-item title="专题集 1 Enable">
+              <f7-accordion-content>
+                <f7-list-item @click="addLayer" value="sl01">示例1</f7-list-item>
+                <f7-list-item @click="addLayer" value="sl02">示例2</f7-list-item>
+                <f7-list-item @click="addLayer" value="sl03">示例3</f7-list-item>                
+              </f7-accordion-content3
+            </f7-list-item>
+            <f7-list-item accordion-item title="专题集 2">
+              <f7-accordion-content>
+                <f7-list-item @click="addLayer" value="sl04">示例4</f7-list-item>
+                <f7-list-item @click="addLayer" value="sl05">示例5</f7-list-item>
+                <f7-list-item @click="addLayer" value="sl06">示例6</f7-list-item>                
+              </f7-accordion-content>
+            </f7-list-item>
+          </f7-list>
           </f7-page>
         </f7-pages>
       </f7-view>
     </f7-panel>
 
     <!-- Right Panel -->
-    <f7-panel right cover layout="dark">
+    <f7-panel right cover layout="white">
       <f7-view id="right-panel-view" navbar-through :dynamic-navbar="true">
         <f7-navbar v-if="$theme.ios" title="Right Panel" sliding></f7-navbar>
         <f7-pages>
@@ -314,7 +317,7 @@
   <script src="js/vue.min.js"></script>
   <script src="js/framework7-vue.min.js"></script>
   <script src="lib/leaflet/1.0.3/leaflet.js"></script>
-  <script src="lib/esri-leaflet/2.0.7/esri-leaflet.js"></script>
+  <script src="lib/esri-leaflet/2.0.7/esri-leaflet-debug.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

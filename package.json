@@ -21,8 +21,8 @@
   "homepage": "https://github.com/CoolGeo2016/WebMapOverlay#readme",
   "dependencies": {
     "esri-leaflet": "^2.0.7",
-    "framework7": "^1.5.4",
     "leaflet": "^1.0.3",
+    "framework7": "^1.5.4",
     "vue": "^2.2.4"
   }
 }
